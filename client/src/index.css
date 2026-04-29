@@ -1,0 +1,384 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   MADNESS FAMILY — Design System
+   Style: Neo-Brutalist Pixel Arcade
+   Primary: #00E5FF (Cyan), Accent: #FFE500 (Yellow)
+   Fonts: Press Start 2P (pixel) + Nunito Bold (body)
+   ============================================================ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Madness Family brand colors */
+  --color-brand-cyan: oklch(0.85 0.18 200);
+  --color-brand-yellow: oklch(0.93 0.2 95);
+  --color-brand-navy: oklch(0.15 0.03 250);
+}
+
+:root {
+  --radius: 0px;
+  --primary: oklch(0.85 0.18 200);
+  --primary-foreground: oklch(0.1 0.02 250);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.15 0.03 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.03 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.03 250);
+  --secondary: oklch(0.97 0.01 200);
+  --secondary-foreground: oklch(0.15 0.03 250);
+  --muted: oklch(0.97 0.005 200);
+  --muted-foreground: oklch(0.5 0.02 250);
+  --accent: oklch(0.93 0.2 95);
+  --accent-foreground: oklch(0.15 0.03 250);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.85 0.005 250);
+  --input: oklch(0.92 0.004 250);
+  --ring: oklch(0.85 0.18 200);
+  --sidebar: oklch(0.97 0.005 200);
+  --sidebar-foreground: oklch(0.15 0.03 250);
+  --sidebar-primary: oklch(0.85 0.18 200);
+  --sidebar-primary-foreground: oklch(0.1 0.02 250);
+  --sidebar-accent: oklch(0.93 0.2 95);
+  --sidebar-accent-foreground: oklch(0.15 0.03 250);
+  --sidebar-border: oklch(0.85 0.005 250);
+  --sidebar-ring: oklch(0.85 0.18 200);
+  --chart-1: oklch(0.85 0.18 200);
+  --chart-2: oklch(0.93 0.2 95);
+  --chart-3: oklch(0.6 0.15 200);
+  --chart-4: oklch(0.7 0.18 95);
+  --chart-5: oklch(0.4 0.1 250);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 1200px;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* ============================================================
+     MADNESS FAMILY — Custom Classes
+     ============================================================ */
+
+  /* Pixel font utility */
+  .font-pixel {
+    font-family: 'Press Start 2P', monospace;
+  }
+
+  /* Body font utility */
+  .font-pixel-body {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+  }
+
+  /* Pixel button style */
+  .pixel-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    padding: 14px 24px;
+    background: #FFE500;
+    color: #0A1628;
+    border: 3px solid #0A1628;
+    box-shadow: 4px 4px 0 #0A1628;
+    transition: all 0.1s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    line-height: 1.6;
+  }
+
+  .pixel-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #0A1628;
+  }
+
+  .pixel-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #0A1628;
+  }
+
+  .pixel-btn-outline {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    padding: 14px 24px;
+    background: transparent;
+    color: #0A1628;
+    border: 3px solid #0A1628;
+    box-shadow: 4px 4px 0 #0A1628;
+    transition: all 0.1s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    line-height: 1.6;
+  }
+
+  .pixel-btn-outline:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #0A1628;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .pixel-btn-white {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    padding: 14px 24px;
+    background: white;
+    color: #0A1628;
+    border: 3px solid #0A1628;
+    box-shadow: 4px 4px 0 #0A1628;
+    transition: all 0.1s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    line-height: 1.6;
+  }
+
+  .pixel-btn-white:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #0A1628;
+  }
+
+  /* Pixel card with yellow corner accents */
+  .pixel-card {
+    background: white;
+    border: 3px solid #0A1628;
+    box-shadow: 6px 6px 0 #0A1628;
+    position: relative;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .pixel-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 #0A1628;
+  }
+
+  /* Yellow corner accent */
+  .pixel-corner::before,
+  .pixel-corner::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #FFE500;
+    border: 2px solid #0A1628;
+  }
+
+  .pixel-corner::before {
+    top: -2px;
+    left: -2px;
+  }
+
+  .pixel-corner::after {
+    top: -2px;
+    right: -2px;
+  }
+
+  /* Section title decoration */
+  .pixel-underline {
+    display: flex;
+    gap: 4px;
+    margin-top: 12px;
+    margin-bottom: 32px;
+  }
+
+  .pixel-underline span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #FFE500;
+    border: 2px solid #0A1628;
+  }
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+@keyframes pixel-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes pixel-bounce {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-6px); }
+  75% { transform: translateY(-3px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 4s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 5s ease-in-out infinite;
+}
+
+.animate-pixel-spin {
+  animation: pixel-spin 8s linear infinite;
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+.animate-blink {
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+.animate-pixel-bounce {
+  animation: pixel-bounce 2s ease-in-out infinite;
+}
+
+/* Pixel wave divider */
+.pixel-wave-white {
+  background: white;
+  clip-path: polygon(
+    0% 0%, 4% 50%, 8% 0%, 12% 50%, 16% 0%, 20% 50%, 24% 0%, 28% 50%,
+    32% 0%, 36% 50%, 40% 0%, 44% 50%, 48% 0%, 52% 50%, 56% 0%, 60% 50%,
+    64% 0%, 68% 50%, 72% 0%, 76% 50%, 80% 0%, 84% 50%, 88% 0%, 92% 50%,
+    96% 0%, 100% 50%, 100% 100%, 0% 100%
+  );
+}
+
+.pixel-wave-cyan {
+  background: #00E5FF;
+  clip-path: polygon(
+    0% 0%, 4% 50%, 8% 0%, 12% 50%, 16% 0%, 20% 50%, 24% 0%, 28% 50%,
+    32% 0%, 36% 50%, 40% 0%, 44% 50%, 48% 0%, 52% 50%, 56% 0%, 60% 50%,
+    64% 0%, 68% 50%, 72% 0%, 76% 50%, 80% 0%, 84% 50%, 88% 0%, 92% 50%,
+    96% 0%, 100% 50%, 100% 100%, 0% 100%
+  );
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00E5FF;
+  border: 2px solid #0A1628;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFE500;
+}
+
+/* Selection color */
+::selection {
+  background: #FFE500;
+  color: #0A1628;
+}
