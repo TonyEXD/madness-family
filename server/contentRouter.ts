@@ -203,7 +203,7 @@ const DEFAULT_DATA = {
 
 // ─── Local JSON file fallback (when DB is unavailable) ───────────────────────
 function getDataFilePath(): string {
-  return path.resolve(__dirname, "cms-data.json");
+  return path.resolve(__dirname_cr, "cms-data.json");
 }
 
 async function getSiteData() {

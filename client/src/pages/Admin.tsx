@@ -231,11 +231,14 @@ function AdminPanel() {
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
   const [isDirty, setIsDirty] = useState(false);
 
-  const { data: serverData, isLoading } = trpc.content.get.useQuery();
+  const { data: serverData, isLoading } = trpc.content.get.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+  });
   const saveMutation = trpc.content.save.useMutation();
 
   useEffect(() => {
-    if (serverData) {
+    if (serverData && !isDirty) {
       setData(serverData as SiteData);
     }
   }, [serverData]);
