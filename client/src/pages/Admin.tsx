@@ -158,35 +158,41 @@ function ImageUploader({ currentUrl, onUpload }: { currentUrl: string; onUpload:
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Reset file input so same file can be re-selected
+    e.target.value = '';
+
     // Validate file type
     if (!file.type.startsWith('image/')) {
       alert('Please select an image file');
       return;
     }
 
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      alert('Image must be under 5MB');
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      alert('Image must be under 10MB');
       return;
     }
 
     setUploading(true);
     try {
-      // Convert to base64
-      const reader = new FileReader();
-      reader.onload = async () => {
-        const base64 = reader.result as string;
-        const result = await uploadMutation.mutateAsync({
-          data: base64,
-          filename: file.name,
-          contentType: file.type,
-        });
-        onUpload(result.url);
-        setUploading(false);
-      };
-      reader.readAsDataURL(file);
-    } catch {
-      alert('Upload failed, please try again');
+      // Convert to base64 using Promise wrapper
+      const base64 = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = () => reject(new Error('Failed to read file'));
+        reader.readAsDataURL(file);
+      });
+
+      const result = await uploadMutation.mutateAsync({
+        data: base64,
+        filename: file.name,
+        contentType: file.type,
+      });
+      onUpload(result.url);
+    } catch (err) {
+      console.error('Upload error:', err);
+      alert('Upload failed: ' + (err instanceof Error ? err.message : 'Unknown error'));
+    } finally {
       setUploading(false);
     }
   };
